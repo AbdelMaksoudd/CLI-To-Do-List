@@ -15,7 +15,7 @@ def main():
                 c()
             else:
                 sys.exit()
-        except Exception:
+        except ValueError:
             print("please input valid choies")
     
     
@@ -31,12 +31,14 @@ d. Exit\n"""
 def a():
     global num_of_tasks, tasks
     if num_of_tasks == 0:
-        print("there is no tasks rn")
+        print("there is no tasks rn\n")
     else:
         for index, task in enumerate(tasks, start=1):
             print(f"{index}. {task}")
+        print()
 
 def b():
+    global num_of_tasks, tasks
     while True:       
         try:
             task = input("add task\n")
@@ -44,11 +46,33 @@ def b():
                 raise ValueError()
             tasks.append(task)
             num_of_tasks += 1
+            break
         except Exception:
             ...
 
 def c():
-    ...
+    global num_of_tasks, tasks
+    while True:       
+        try:
+            if num_of_tasks == 0:
+                print("there in no tasks to delete")
+                break
+            elif num_of_tasks == 1:
+                task = int(input(f"""which one u want to delete?
+                         (input 1 to delete the only task you have)"""))
+                if not task:
+                    raise ValueError()
+            else:    
+                task = int(input(f"""which one u want to delete?
+                             input from 1 : {num_of_tasks}"""))
+                if not task:
+                    raise ValueError()
+            tasks.pop((task - 1))
+            num_of_tasks -= 1
+            break
+        except ValueError:
+            print("please enter valid task")
+    
 
 if __name__ == "__main__":
     main()
