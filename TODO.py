@@ -4,7 +4,7 @@ tasks = []
 def main():
     while True:
         try:
-            user_input = input(menu()).split()[0].lower()
+            user_input = input(menu()).strip().lower()
             if user_input not in ["a", "b", "c", "d"]:
                 raise ValueError()
             elif user_input == "a":
@@ -41,7 +41,7 @@ def b():
     global num_of_tasks, tasks
     while True:       
         try:
-            task = input("add task\n")
+            task = input("add task\n").strip()
             if not task:
                 raise ValueError()
             tasks.append(task)
@@ -55,17 +55,17 @@ def c():
     while True:       
         try:
             if num_of_tasks == 0:
-                print("there in no tasks to delete")
+                print("there in no tasks to delete \n")
                 break
             elif num_of_tasks == 1:
                 task = int(input(f"""which one u want to delete?
                          (input 1 to delete the only task you have)"""))
-                if not task:
+                if not (1 <= task <= num_of_tasks):
                     raise ValueError()
             else:    
                 task = int(input(f"""which one u want to delete?
                              input from 1 : {num_of_tasks}"""))
-                if not task:
+                if not (1 <= task <= num_of_tasks):
                     raise ValueError()
             tasks.pop((task - 1))
             num_of_tasks -= 1
